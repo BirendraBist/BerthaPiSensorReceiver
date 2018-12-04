@@ -19,7 +19,7 @@ namespace BerthaPiSensorReceiver
             double _temperature;
             double _pressure;
             double _humidity;
-            int _userId;
+            //int _userId;
             int number = 0;
 
             //Creates a UdpClient for reading incoming data.
@@ -62,22 +62,22 @@ namespace BerthaPiSensorReceiver
                     string text2 = list2[1];
                     string[] list3 = textLines[2].Split(':');
                     string text3 = list3[1];
-                    string[] list4 = textLines[3].Split(':');
-                    string text4 = list4[1];
+                    //string[] list4 = textLines[3].Split(':');
+                    //string text4 = list4[1];
 
 
                     _temperature = double.Parse(text1);
                     _pressure = double.Parse(text2);
                     _humidity = double.Parse(text3);
-                    _userId = int.Parse(text4);
+                    //_userId = int.Parse(text4);
 
                     //Console.WriteLine("Numerical values");
                     Console.WriteLine("Temperature" + _temperature);
                     Console.WriteLine("Pressure" + _pressure);
                     Console.WriteLine("Humidity" + _humidity);
-                    Console.WriteLine("UserId: " + _userId);
+                    //Console.WriteLine("UserId: " + _userId);
 
-                    RaspberryRecord raspberry = new RaspberryRecord(_temperature, _pressure, _humidity, _userId);
+                    RaspberryRecord raspberry = new RaspberryRecord(_temperature, _pressure, _humidity, 1);
 
                     PostRaspberryRecordAsync(raspberry);
                     Thread.Sleep(1000);
@@ -94,7 +94,7 @@ namespace BerthaPiSensorReceiver
                 {
                     HttpClient client = new HttpClient();
 
-                    client.BaseAddress = new Uri("");
+                    client.BaseAddress = new Uri("https://berthapibeta20181204125106.azurewebsites.net");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
